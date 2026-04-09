@@ -243,6 +243,16 @@ build {
     script   = "provision.ps1"
   }
 
+  provisioner "powershell" {
+    use_pwsh = true
+    script   = "provision-acap-harden.ps1"
+  }
+
+  provisioner "powershell" {
+    use_pwsh = true
+    script   = "provision-acap-trading-tune.ps1"
+  }
+
   provisioner "windows-update" {
     filters = [
       # exclude KB5007651:
