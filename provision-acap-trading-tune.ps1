@@ -60,19 +60,12 @@ powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 0 2>$null
 powercfg /setactive SCHEME_CURRENT 2>$null
 powercfg /hibernate off 2>$null
 
-# --- NIC: disable interrupt moderation, EEE, LSO ---
-Write-Host "[*] NIC tuning"
-$nics = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' }
-foreach ($nic in $nics) {
-    $n = $nic.Name
-    Set-NetAdapterAdvancedProperty -Name $n -DisplayName "Interrupt Moderation" -DisplayValue "Disabled" -EA SilentlyContinue
-    Set-NetAdapterAdvancedProperty -Name $n -DisplayName "Receive Buffers" -DisplayValue "1024" -EA SilentlyContinue
-    Set-NetAdapterAdvancedProperty -Name $n -DisplayName "Transmit Buffers" -DisplayValue "512" -EA SilentlyContinue
-    Set-NetAdapterAdvancedProperty -Name $n -DisplayName "Energy Efficient Ethernet" -DisplayValue "Disabled" -EA SilentlyContinue
-    Set-NetAdapterAdvancedProperty -Name $n -DisplayName "Large Send Offload V2 (IPv4)" -DisplayValue "Disabled" -EA SilentlyContinue
-    Set-NetAdapterAdvancedProperty -Name $n -DisplayName "Flow Control" -DisplayValue "Disabled" -EA SilentlyContinue
-    Set-NetAdapterRss -Name $n -Enabled $true -EA SilentlyContinue
-}
+# --- NIC tuning skipped during image build ---
+# NIC advanced property changes (interrupt moderation, buffers, EEE, LSO, flow control)
+# crash the QEMU virtio-net driver and kill the SSH session. Apply these on physical
+# NICs post-deploy via Ansible role instead. The TCP/IP registry settings above still
+# apply and provide the main latency benefit (Nagle disabled, auto-tuning off).
+Write-Host "[*] NIC tuning: skipped (applied post-deploy on physical NICs)"
 
 # --- Windows Update: no auto-reboot ---
 Write-Host "[*] Windows Update policy"
