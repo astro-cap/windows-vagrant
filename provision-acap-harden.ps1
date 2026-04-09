@@ -101,6 +101,10 @@ Set-RegValue "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" "Disab
 Set-Service -Name 'srservice' -StartupType Disabled -ErrorAction SilentlyContinue
 Stop-Service -Name 'srservice' -Force -ErrorAction SilentlyContinue
 
+# --- WINRM REMOTE ADMIN ---
+Write-Host "[*] Enabling WinRM remote admin (LocalAccountTokenFilterPolicy)"
+Set-RegValue "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" "LocalAccountTokenFilterPolicy" 1
+
 # --- BUSINESS IDENTITY ---
 Write-Host "[*] Setting business identity"
 Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters' -Name 'srvcomment' -Value 'Astro Capital - Workstation' -Force
