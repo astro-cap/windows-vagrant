@@ -230,10 +230,12 @@ build {
     script   = "remove-one-drive.ps1"
   }
 
-  provisioner "powershell" {
-    use_pwsh = true
-    script   = "remove-apps.ps1"
-  }
+  # Skipped: remove-apps.ps1 uses Get-AppxPackage which fails under pwsh/PS7.
+  # UWP bloatware removal handled in Ansible roles post-deploy instead.
+  # provisioner "powershell" {
+  #   use_pwsh = true
+  #   script   = "remove-apps.ps1"
+  # }
 
   provisioner "windows-restart" {
   }
