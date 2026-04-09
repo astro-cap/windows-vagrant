@@ -106,3 +106,4 @@ Write-Host "[*] Setting business identity"
 Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters' -Name 'srvcomment' -Value 'Astro Capital - Workstation' -Force
 
 Write-Host "[+] Hardening complete." -ForegroundColor Green
+exit 0

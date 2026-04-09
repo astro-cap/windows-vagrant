@@ -82,3 +82,4 @@ Set-ItemProperty -Path $wuPath -Name "NoAutoRebootWithLoggedOnUsers" -Value 1 -T
 Set-ItemProperty -Path $wuPath -Name "AUOptions" -Value 2 -Type DWord -Force
 
 Write-Host "[+] Trading tuning complete. Reboot required for BCD changes." -ForegroundColor Green
+exit 0
