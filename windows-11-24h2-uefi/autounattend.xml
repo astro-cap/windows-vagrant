@@ -60,18 +60,15 @@
                     <InstallFrom>
                         <MetaData wcm:action="add">
                             <Key>/IMAGE/INDEX</Key>
-                            <Value>1</Value>
+                            <Value>6</Value>
                         </MetaData>
                     </InstallFrom>
                 </OSImage>
             </ImageInstall>
             <UserData>
                 <ProductKey>
-                    <!--
-                        Generic Volume License Keys (GVLK) for Key Management Services (KMS) client activation
-                        https://learn.microsoft.com/en-us/windows-server/get-started/kms-client-activation-keys
-                    -->
-                    <!--<Key>NPPR9-FWDCX-D2C8J-H872K-2YT43</Key>-->
+                    <!-- Windows 11 Pro generic key (selects Pro edition from multi-edition ISO) -->
+                    <Key>W269N-WFGWX-YVC9B-4J6C9-T83GX</Key>
                     <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>
